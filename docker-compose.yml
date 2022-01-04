@@ -23,3 +23,8 @@ services:
       -p ${DB_PASSWORD}
       -s ${DB_DATABASE_NAME}
       -connprops useSSL\\=false
+    # networks:
+    #   - sample_network
+# networks:
+#   sample_network:
+#     external: true
