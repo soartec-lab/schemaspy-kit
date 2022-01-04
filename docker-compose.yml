@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 8088:80
+    volumes:
+      - ./output:/usr/share/nginx/html
+  schemaspy:
+    image: schemaspy/schemaspy:6.1.0
+    env_file: .env
+    volumes:
+      - ./output:/output
+    command: >
+      java -jar schemaspy-6.1.0.jar
+      -dp /drivers_inc
+      -t mysql
+      -host ${DB_HOST}
+      -port ${DB_PORT}
+      -db ${DB_DATABASE_NAME}
+      -u ${DB_USER_NAME}
+      -p ${DB_PASSWORD}
+      -s ${DB_DATABASE_NAME}
+      -connprops useSSL\\=false
